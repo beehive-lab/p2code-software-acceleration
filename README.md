@@ -20,4 +20,18 @@ You can run the `VectorAddInt.java` class which uses the TornadoVM API to offloa
 
 ```bash
 ./run-software-acceleration.sh examples/VectorAddInt.java
+🔧 Compiling /data/examples/VectorAddInt.java...
+✅ Compilation successful
+🚀 Running with TornadoVM: VectorAddInt
+WARNING: Using incubator modules: jdk.incubator.vector
+Task info: s0.t0
+	Backend           : OPENCL
+	Device            : NVIDIA RTX A2000 8GB Laptop GPU CL_DEVICE_TYPE_GPU (available)
+	Dims              : 1
+	Global work offset: [0]
+	Global work size  : [256]
+	Local  work size  : [256, 1, 1]
+	Number of workgroups  : [1]
+
+Result is correct
 ```
