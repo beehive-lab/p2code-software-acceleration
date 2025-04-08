@@ -1,34 +1,13 @@
-
-
-
-
-
-
 # TornadoVM P2Code Runner (NVIDIA)
 
 This project provides a Docker-based environment to compile and execute TornadoVM-accelerated Java programs using the OpenCL backend on NVIDIA GPUs.
 
 ---
 
-## 1. Build the Docker Image or pull the latest image from DockerHub
-
-Make sure you have Docker installed and NVIDIA drivers properly set up for GPU passthrough.
-
-- To build the Docker image, run:
-
-```bash
-./buildDocker.sh
-```
-
-- To pull from DockerHub, run:
-
-```bash
-docker pull beehivelab/p2code-software-acceleration-container:latest
-```
-
-## 2. Run the Example
+## 1. Run an Example
 
 You can run the `VectorAddInt.java` class which uses the TornadoVM API to offload the execution of a method for execution on NVIDIA GPUs.
+By invoking the `run-software-acceleration.sh` script, you will pull the latest docker image and will run the example as follows.
 
 ```bash
 ./run-software-acceleration.sh examples/VectorAddInt.java
@@ -46,4 +25,14 @@ Task info: s0.t0
     Number of workgroups  : [1]
 
 Result is correct
+```
+
+## 2. Extend the Dockerfile and build the Docker Image
+
+Make sure you have Docker installed and NVIDIA drivers properly set up for GPU passthrough.
+
+- To build the Docker image, run:
+
+```bash
+./buildDocker.sh
 ```
