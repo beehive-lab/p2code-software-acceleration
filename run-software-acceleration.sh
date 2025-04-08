@@ -23,4 +23,4 @@ docker run -it \
   --runtime=nvidia \
   -v "$MOUNT_DIR":/data \
   -p 8080:8080 \
-  p2code-software-acceleration-container:latest "$MOUNT_FILE"
+  beehivelab/p2code-software-acceleration-container:latest "$MOUNT_FILE"
