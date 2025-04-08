@@ -1,0 +1,45 @@
+## Docker File for TornadoVM on NVIDIA GPUs
+## Adapted for TornadoVM v1.1.0
+FROM nvidia/opencl
+
+LABEL MAINTAINER Thanos Stratikopoulos <athanasios.stratikopoulos@manchester.ac.uk>
+
+RUN apt-get update -q && apt-get install -qy \
+        python3 build-essential vim git cmake maven openjdk-17-jdk python3-pip \
+        wget && rm -rf /var/lib/apt/lists/*
+
+RUN python3 -m pip install wget
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+# COPY settings/settings.xml /root/.m2/settings.xml
+
+RUN java -version
+RUN javac -version
+
+ENV PATH /usr/lib/jvm/java-17-openjdk-amd64/bin:$PATH
+ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
+
+WORKDIR /tornado/
+WORKDIR /tornado/
+RUN git clone https://github.com/beehive-lab/TornadoVM.git tornado
+WORKDIR /tornado/tornado
+RUN git checkout v1.1.0
+ENV CMAKE_ROOT /usr
+RUN ./bin/tornadovm-installer --jdk jdk21 --backend opencl --mvn_single_threaded 
+SHELL ["/bin/bash", "-c", "source /tornado/tornado/setvars.sh"]
+
+## ENV-Variables Taken from the SOURCE.sh
+ENV JAVA_HOME /tornado/tornado/etc/dependencies/TornadoVM-jdk21/jdk-21.0.6
+ENV PATH /tornado/tornado/bin/bin:$PATH
+ENV TORNADO_SDK /tornado/tornado/bin/sdk
+ENV TORNADO_ROOT /tornado/tornado 
+
+COPY p2code-run-tornadovm.sh /usr/local/bin/p2code-run-tornadovm.sh
+RUN chmod +x /usr/local/bin/p2code-run-tornadovm.sh
+ENV PATH /usr/local/bin/p2code-run-tornadovm.sh:$PATH
+
+WORKDIR /data
+VOLUME ["/data"]
+ENTRYPOINT ["p2code-run-tornadovm.sh"]
+EXPOSE 3000 
