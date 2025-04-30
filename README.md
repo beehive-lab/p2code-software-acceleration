@@ -36,3 +36,11 @@ Make sure you have Docker installed and NVIDIA drivers properly set up for GPU p
 ```bash
 ./buildDocker.sh
 ```
+
+## Acknowledgments
+
+This work is supported by the following EU & UKRI grant:
+- EU Horizon Europe & UKRI [P2CODE 101093069](https://p2code-project.eu/).
+
+## License
+[![License: MIT](https://img.shields.io/badge/MIT-blue.svg)](https://github.com/beehive-lab/p2code-software-acceleration/blob/main/LICENSE)
